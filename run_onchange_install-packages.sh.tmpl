@@ -1,0 +1,12 @@
+{{- if eq .chezmoi.os "darwin" -}}
+#!/bin/bash
+
+# Brewfile hash: {{ include "dot_Brewfile" | sha256sum }}
+
+if command -v brew &> /dev/null; then
+    echo "🍺 Installing packages from Brewfile..."
+    brew bundle --global --cleanup
+else
+    echo "⚠️  Homebrew not found. Skipping package installation."
+fi
+{{- end -}}

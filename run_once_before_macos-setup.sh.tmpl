@@ -1,0 +1,16 @@
+{{- if eq .chezmoi.os "darwin" -}}
+#!/bin/bash
+
+echo "Applying essential macOS system defaults..."
+
+# Set a faster key repeat rate
+defaults write NSGlobalDomain KeyRepeat -int 1
+defaults write NSGlobalDomain InitialKeyRepeat -int 10
+
+# Install Homebrew
+if ! command -v brew >/dev/null 2>&1; then
+  echo "Installing Homebrew..."
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+
+{{- end -}}
